@@ -20,8 +20,7 @@ public class Ball {
 	}
 	public void reflectVertical(){
 		this.yDelta=-this.yDelta;
-	}
-	
+	}	
 	@Override
 	public String toString(){
 		String retorno="Ball at ("+this.x+","+this.y+") of velocity ("+this.xDelta+","+this.yDelta+")";
