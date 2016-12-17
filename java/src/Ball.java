@@ -24,8 +24,7 @@ public class Ball {
 	@Override
 	public String toString(){
 		String retorno="Ball at ("+this.x+","+this.y+") of velocity ("+this.xDelta+","+this.yDelta+")";
-		return retorno;
-		
+		return retorno;		
 	}
 	
 	public float getxDelta() {

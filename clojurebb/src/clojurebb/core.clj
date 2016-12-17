@@ -1,60 +1,34 @@
 (ns clojurebb.core
   (:gen-class)
 )
-(defn ball  [speed direction]	
-	(def xdelta (* speed (Math/cos (Math/toRadians direction))))	
-	(def ydelta (* (- speed) (Math/sin (Math/toRadians direction) )))			
-	(list xdelta ydelta)
-)
-(defn move [x y xdelta ydelta]
- (def xr (+ x xdelta))
- (def yr (+ y ydelta))    
- (clojure.string/join ", " [xr yr])
-)
-(defn reflectHorizontal [xdelta]
-	(def xdeltar (- xdelta 1))
-	(+ xdeltar 0) 
-)
-(defn reflectVertical [ydelta]
-	(def ydeltar (- ydelta 1))	
-	(+ ydeltar 0)
-)	
-(defn Container [x y width heigth]
-	(def x2 (+ x (- width 1)))
-	(def y2 (+ y (- heigth 1)))
-	(list x2 y2)
-)
-(defn collidesWith[x y radius x1 x2 y1 y2 xdelta ydelta]
+(defn collidesWithx[x radius x1 x2 xdelta]
 	(if 
 		(or (<= (- x radius) x1) (>= (+ x radius) x2))
-			(reflectHorizontal xdelta)
-			(+ 0 0)
-	)
+			(- xdelta 1)
+			(- xdelta 0)			
+	)	
+)
+(defn collidesWithy[y radius y1 y2 ydelta]	
 	(if 
 		(or (<= (- y radius) y1) (>= (+ y radius) y2))
-			(reflectVertical ydelta)
-			(+ 0 0)
+			(- ydelta 1)
+			(- ydelta 0)
+			
 	)
+)
+(defn move [x y radius xdelta ydelta niter x1 y1 x2 y2]	
+	(if
+		(not= niter 0)
+		(println "Ball at (" x "," y ") of velocity (" xdelta "," ydelta ")")
+	)
+	(if
+		(< niter 10)			
+			(move (+ x xdelta) (+ y ydelta) radius 	(collidesWithx x radius x1 x2 xdelta) (collidesWithy y radius y1 y2 ydelta) (+ niter 1) x1 y1 x2 y2) 						
+	)		
 )	
 (defn -main
-  [& args]  
-  (def x1 0)
-  (def x 0)
-  (def y 0)
-  (def y1 0)
-  (def x2 0)
-  (def y2 0)
-  (def xdelta 0)
-  (def ydelta 0)    
-  (loop [x 0]
-      (when (< x 10)
-         
-      	(move)
-
-
-        (recur (+ x 1))
-      )
-   )
-
-
+  [& args]    
+  (def xdelta (* 10 (Math/cos (Math/toRadians 30))))	
+  (def ydelta (* (- 10) (Math/sin (Math/toRadians 30) )))  
+  (move 50 50 5 xdelta ydelta 0 0 0 99 99)  
 )
