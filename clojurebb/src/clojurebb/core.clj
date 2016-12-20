@@ -32,3 +32,6 @@
   (def ydelta (* (- 10) (Math/sin (Math/toRadians 30) )))  
   (move 50 50 5 xdelta ydelta 0 0 0 99 99)  
 )
+;(let [xdelta (if (or (<= (- x radius) x1) (>= (+ x radius) x2))
+;		list((- xdelta 1) 0)			
+;)
