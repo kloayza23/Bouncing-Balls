@@ -1,6 +1,12 @@
+; Author: Kleber Loayza
+; Descripcion: Programa que ejecuta Bouncing Balls, que permite que un determinado objetivo 
+; cirucle en un rectangulo de 100 x 100, con cierta velocidad determinada por
+; xdelta y ydelta.
 (ns clojurebb.core
   (:gen-class)
 )
+; Esta funcion permite verificar si x ha llegado al limite x2, y si es asi, cambia a ydelta por
+; su opuesto, de la misma manera con su limite minimo x1, lo cambia si ha llegado al minimo.
 (defn collidesWithx[x radius x1 x2 xdelta]
 	(if 
 		(or (<= (- x radius) x1) (>= (+ x radius) x2))
@@ -8,6 +14,8 @@
 			(- xdelta 0)			
 	)	
 )
+; Esta funcion permite verificar si y ha llegado al limite y2, y si es asi, cambia a ydelta por
+; su opuesto, de la misma manera con su limite minimo y1, lo cambia si ha llegado al minimo.
 (defn collidesWithy[y radius y1 y2 ydelta]	
 	(if 
 		(or (<= (- y radius) y1) (>= (+ y radius) y2))
@@ -16,6 +24,8 @@
 			
 	)
 )
+; Esta funcion permite mover el objeto llegando a sus limites respectivos x2 y y2 como maximos, y 
+; x1 y y1, como limites minimos.
 (defn move [x y radius xdelta ydelta iiter niter x1 y1 x2 y2]	
 	(if
 		(not= iiter 0)
