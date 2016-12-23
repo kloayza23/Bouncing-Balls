@@ -23,11 +23,11 @@
 	)
 	(if
 		(< iiter niter)			
-			(move (+ x xdelta) (+ y ydelta) radius 	
-				(collidesWithx x radius x1 x2 xdelta) 
-				(collidesWithy y radius y1 y2 ydelta) 
-				(+ iiter 1) niter x1 y1 x2 y2
-			) 						
+				(move (+ x xdelta) (+ y ydelta) radius 	
+					(collidesWithx (+ x xdelta) radius x1 x2 xdelta) 
+					(collidesWithy (+ y ydelta) radius y1 y2 ydelta) 
+					(+ iiter 1) niter x1 y1 x2 y2
+				) 				
 		(println "End Game")
 	)		
 )	
@@ -48,6 +48,3 @@
 ; llegue otra vez a x2 del otro lado.
   (move x y radius xdelta ydelta iiter niter x1 y1 x2 y2)  
 )
-;(let [xdelta (if (or (<= (- x radius) x1) (>= (+ x radius) x2))
-;		list((- xdelta 1) 0)			
-;)
